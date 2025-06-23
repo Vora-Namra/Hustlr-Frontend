@@ -1,7 +1,7 @@
 // src/Header/Header.tsx
 import React, { useEffect, useState } from 'react';
 import { IconAsset, IconMenu2 } from "@tabler/icons-react";
-import { Avatar, Button, Drawer } from '@mantine/core';
+import { Button, Drawer } from '@mantine/core';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {jwtDecode} from 'jwt-decode';
@@ -11,9 +11,9 @@ import NavLinks from './NavLinks';
 import { ProfileMenu } from './ProfileMenu';
 import NotificationMenu from './NotificationMenu';
 
-import axiosInstance, { setupResponseInterceptor } from '../Interceptor/AuthInterceptor';
+import  { setupResponseInterceptor } from '../Interceptor/AuthInterceptor';
 import { setUser, removeUser } from '../Slices/UserSlice';
-import { setJwt, removeJwt } from '../Slices/JwtSlice';
+import { removeJwt } from '../Slices/JwtSlice';
 import { setProfile } from '../Slices/ProfileSlice';
 
 interface DecodedToken {

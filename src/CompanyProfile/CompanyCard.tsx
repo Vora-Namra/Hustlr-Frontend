@@ -1,6 +1,6 @@
 
 import { ActionIcon } from "@mantine/core"
-import { IconAdjustments, IconBookmark, IconExternalLink } from "@tabler/icons-react"
+import {  IconExternalLink } from "@tabler/icons-react"
 
 export const CompanyCard=(props:any)=>{
     return <div className='flex justify-between bg-mine-shaft-900 items-center rounded-lg p-2'>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@mantine/core";
 import { useState } from "react";
 import { ExpInput } from "./ExpInput";

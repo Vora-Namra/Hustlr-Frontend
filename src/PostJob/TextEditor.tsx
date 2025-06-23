@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RichTextEditor, Link } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
 import Highlight from '@tiptap/extension-highlight';
@@ -6,14 +8,12 @@ import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
-import { content } from '../Data/PostJob';
 import { useEffect } from 'react';
 
 
 
 const TextEditor=(props:any)=> {
 
-  const data =content
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -32,7 +32,7 @@ const TextEditor=(props:any)=> {
   
   useEffect(()=>{
     editor?.commands.setContent(props.data);
-  },[props.data])
+  },[editor?.commands, props.data])
 
   return (
     <RichTextEditor editor={editor}>

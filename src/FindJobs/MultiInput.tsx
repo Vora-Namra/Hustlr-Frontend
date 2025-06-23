@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import React, { useEffect, useState } from 'react';
 // import {
 //   CheckIcon,
@@ -191,7 +192,6 @@ interface MultiInputProps {
 export function MultiInput({
   options,
   title,
-  placeholder = '',
   icon: Icon = IconSearch,
 }: MultiInputProps) {
   const [data, setData] = useState<string[]>(options);

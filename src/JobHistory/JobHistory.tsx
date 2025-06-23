@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tabs } from "@mantine/core"
-import { jobList } from "../Data/JobsData"
 import Card from "./Card"
 import { useEffect, useState } from "react";
 import { getAllJobs } from "../Services/JobService";

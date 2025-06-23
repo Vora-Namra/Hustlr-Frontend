@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IconCalendarMonth, IconHeart, IconMapPin } from '@tabler/icons-react';
 import { Avatar, Button, Divider, Modal, Text } from '@mantine/core';
 import { Link, useParams } from 'react-router-dom';
@@ -23,10 +25,10 @@ function TalentCard(props: any) {
   
   const handleOffer=(status:string)=>{
     let interview = {
-      id:id,
-      applicantId: props.applicantId, 
-      applicationStatus: status,
-      interviewTime: date?.toISOString() 
+      applicationId: id || '',
+      status: status,
+      applicantId: props.applicantId,
+      interviewTime: date?.toISOString() || undefined
     };
     if(status=="INTERVIEWING"){
       const [hours,minutes]= time.split(":").map(Number);
@@ -35,7 +37,7 @@ function TalentCard(props: any) {
       interview={...interview, interviewTime:date?.toISOString() };
     }
       
-    changeAppStatus(interview).then((res)=>{
+    changeAppStatus(interview).then(()=>{
       if(status=="INTERVIEWING")successNotification('Interview Scheduled', 'Interview Scheduled Successfully');
       else if(status=="OFFERED")successNotification("Offered","Offer has been sent Successfully.");
       else successNotification("Rejected","Applicant Had been Rejected.");

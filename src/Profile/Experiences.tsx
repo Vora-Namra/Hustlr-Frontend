@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ActionIcon } from "@mantine/core";
 import { IconPencil, IconPlus, IconX } from "@tabler/icons-react";
 import { useState } from "react";

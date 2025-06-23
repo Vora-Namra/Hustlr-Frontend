@@ -1,4 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {  Route, Routes, useNavigate } from 'react-router-dom';
 import FindJobs from './FindJobs';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';

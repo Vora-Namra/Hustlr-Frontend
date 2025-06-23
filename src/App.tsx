@@ -1,4 +1,3 @@
-import { Divider } from '@mantine/core';
 import '@mantine/dates/styles.css';
 import { 
   MantineProvider, 
@@ -11,10 +10,8 @@ import '@mantine/core/styles.css';
 import { Notifications } from '@mantine/notifications'; 
 import '@mantine/tiptap/styles.css'
 import '@mantine/carousel/styles.css';
-import HomePage from './Pages/HomePage';
 import { Provider } from 'react-redux';
 import Store from './Store';
-import { getItem } from './Services/LocalStorageService';
 import AppRoutes from './Pages/AppRoutes';
 
 const App = () => {
@@ -34,7 +31,6 @@ const App = () => {
       ],
     },
   });
-  const user = getItem("user");
 
   return (
 

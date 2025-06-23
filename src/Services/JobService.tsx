@@ -1,7 +1,6 @@
 import axiosInstance from "../Interceptor/AuthInterceptor";
 
 
-const base_url = "https://hustlr-backend.onrender.com/jobs/";
 
 interface Job {
     id?: string;

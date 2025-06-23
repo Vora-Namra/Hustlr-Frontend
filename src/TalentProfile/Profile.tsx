@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Divider } from "@mantine/core";
 import { IconBriefcase, IconMapPin } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
@@ -6,16 +8,19 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProfile } from "../Services/ProfileService";
 
-function Profile(props: any) {
+function Profile() {
   const {id} =useParams();
   const [profile,setProfile]= useState<any>({});
   useEffect(()=>{
     window.scrollTo(0,0);
-    getProfile(id).then((res)=>{
+    if(id){
+      getProfile(id).then((res)=>{
       setProfile(res);
     }).catch((err)=>{
       console.log("Error fetching profile:", err);
     })
+    }
+    
   },[id])
   
   return (

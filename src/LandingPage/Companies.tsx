@@ -1,4 +1,3 @@
-import React from 'react';
 import { companies } from "../Data/Data";
 import Marquee from 'react-fast-marquee';
 

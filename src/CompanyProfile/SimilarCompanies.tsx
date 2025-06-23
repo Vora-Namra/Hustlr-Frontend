@@ -1,7 +1,5 @@
 
 import { similar } from "../Data/Company"
-import { talents } from "../Data/TalentData"
-import TalentCard from "../FindTalent/TalentCard"
 import { CompanyCard } from "./CompanyCard"
 
 export const SimilarCompanies=()=>{

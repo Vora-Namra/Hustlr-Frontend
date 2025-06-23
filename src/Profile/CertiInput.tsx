@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextInput } from "@mantine/core";
 import SelectInput from "./SelectInput";
 import fields from "../Data/Profile";

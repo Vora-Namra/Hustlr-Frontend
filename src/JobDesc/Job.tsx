@@ -1,9 +1,9 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActionIcon, Button, Divider } from "@mantine/core"
 import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import {card} from "../Data/JobDescData"
-//@ts-ignore
 import  DOMPurify  from "dompurify"
 import { timeAgo } from "../Services/Utilities"
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key, useState, useEffect } from "react"
@@ -52,7 +52,7 @@ export const Job =(props:any)=>{
       },[props])
 
       const handleClose=()=>{
-        postJob({...props,jobStatus:"CLOSED"}).then((res)=>{
+        postJob({...props,jobStatus:"CLOSED"}).then(()=>{
           successNotification("Success","Job Closed Successfully");
         }).catch((err)=>{
           errorNotification("Error",err.response.data.errorMessage);

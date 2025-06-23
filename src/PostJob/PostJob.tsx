@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import SelectInput from "./SelectInput";
 import {content, fields} from "../Data/PostJob";
 import { Button, NumberInput, TagsInput, Textarea } from "@mantine/core";
@@ -82,11 +84,11 @@ const PostJob=()=> {
                 const res = await postJob(jobData);
                 successNotification("Success", "Job Posted Successfully");
                 navigate(`/posted-job/${res.id}`);
-            } catch (err: unknown) {
+            } catch (err: any) {
                 console.error(err);
                 errorNotification(
                     "Failed", 
-                    (err as any)?.response?.data?.message || "Failed to post job"
+                    err?.response?.data?.message || "Failed to post job"
                 );
             }
         }
@@ -112,7 +114,7 @@ const PostJob=()=> {
                 console.error(err);
                 errorNotification(
                     "Failed", 
-                    err.response?.data?.message || "Failed to save draft"
+                    (err as any).response?.data?.message || "Failed to save draft"
                 );
             }
         }

@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "../Interceptor/AuthInterceptor";
 
-// Corrected the protocol from httpL:// to http://
-const base_url = "https://hustlr-backend.onrender.com/users/";
-
 const registerUser = async (user: any) => {
   return axiosInstance.post(`/users/register`, user)
     .then(res => res.data)

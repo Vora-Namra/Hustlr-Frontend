@@ -1,5 +1,6 @@
+/* eslint-disable prefer-const */
 import { ActionIcon } from "@mantine/core";
-import { IconPlus, IconPencil, IconX, IconTrash } from "@tabler/icons-react";
+import { IconPlus, IconPencil, IconX, } from "@tabler/icons-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CertiCard from "./CertiCard";

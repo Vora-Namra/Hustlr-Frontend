@@ -1,3 +1,6 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 
 export const SORT_OPTIONS = {
@@ -11,7 +14,7 @@ const sortSlice = createSlice({
   name: 'sort',
   initialState: SORT_OPTIONS.RELEVANCE,
   reducers: {
-    updateSort: (state, action) => {
+    updateSort: (_state, action) => {
       return action.payload;
     },
     resetSort: () => {

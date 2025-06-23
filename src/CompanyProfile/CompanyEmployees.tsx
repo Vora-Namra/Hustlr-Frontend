@@ -1,7 +1,5 @@
 
-import { jobList } from "../Data/JobsData"
 import { talents } from "../Data/TalentData"
-import JobCard from "../FindJobs/JobCard"
 import TalentCard from "../FindTalent/TalentCard"
 
 export const CompanyEmployees=()=>{

@@ -1,9 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge, Tabs } from "@mantine/core"
-import { AboutComp } from "../CompanyProfile/AboutComp"
-import { CompanyEmployees } from "../CompanyProfile/CompanyEmployees"
-import { CompanyJobs } from "../CompanyProfile/CompanyJobs"
 import { Job } from "../JobDesc/Job"
-import { talents } from "../Data/TalentData"
 import TalentCard from "../FindTalent/TalentCard"
 import { useEffect, useState } from "react"
 

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Divider } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ApplyJobComp } from "../ApplyJob/ApplyJobComp";
 import { useEffect, useState } from "react";
 import { getJob } from "../Services/JobService";
@@ -10,13 +12,15 @@ function ApplyJobPage() {
   const {id} = useParams();
   const [job, setJob] = useState<any>(null);
   useEffect(()=>{
-    window.scrollTo(0,0);
-    getJob(id).then((res)=>{
-      setJob(res);
-    }).catch((err)=>{
-      console.log(err);
-    })
-  },[id])
+      window.scrollTo(0,0);
+      if (id) {
+        getJob(id).then((res)=>{
+          setJob(res);
+        }).catch((err)=>{
+          console.log(err);
+        })
+      }
+    },[id])
   return (
       <div className="min-h-[90vh] bg-mine-shaft-950 font-['poppins'] p-4">
         <Divider size="xs" />

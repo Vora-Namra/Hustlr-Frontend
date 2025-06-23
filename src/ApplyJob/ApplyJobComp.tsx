@@ -1,29 +1,28 @@
-import { Button, Divider, FileInput, NumberInput, rem, Textarea, TextInput,Notification, LoadingOverlay } from "@mantine/core"
-import { IconCheck, IconPaperclip } from "@tabler/icons-react"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Divider,  } from "@mantine/core"
 import ApplicationForm from "./ApplicationForm"
 import { timeAgo } from "../Services/Utilities"
 
-export const ApplyJobComp=(props:any)=>{
-    const [preview,setPreview]=useState(false)
-    const [submit,setSubmit]=useState(false)
-    const [sec,setSec]=useState(5)
-    const navigate= useNavigate()
+export const ApplyJobComp=(props)=>{
+    // const [preview,setPreview]=useState(false)
+    // const [submit,setSubmit]=useState(false)
+    // const [sec,setSec]=useState(5)
+    // const navigate= useNavigate()
 
-    const handlePreview=()=>{
-        setPreview(!preview)
-        window.scrollTo({top:0,behavior:'smooth'})
-    }
-    const handleSubmit=()=>{
-        setSubmit(true)
-        let x=5
-        setInterval(()=>{
-            x--
-            setSec(x)
-            if(x==0)navigate('/find-jobs')
-        },1000)
-    }
+    // const handlePreview=()=>{
+    //     setPreview(!preview)
+    //     window.scrollTo({top:0,behavior:'smooth'})
+    // }
+    // const handleSubmit=()=>{
+    //     setSubmit(true)
+    //     let x=5
+    //     setInterval(()=>{
+    //         x--
+    //         setSec(x)
+    //         if(x==0)navigate('/find-jobs')
+    //     },1000)
+    // }
+
     return <div className="w-2/3 mx-auto">
                
 

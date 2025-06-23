@@ -21,6 +21,7 @@ import {
 import { useSelector } from "react-redux";
 import { scanResumeGemini } from "../Services/ScanResumeGemini";
 import * as pdfjsLib from 'pdfjs-dist';
+import { TextItem } from "pdfjs-dist/types/src/display/api";
 
 // Set PDF.js worker path
 pdfjsLib.GlobalWorkerOptions.workerSrc = 
@@ -80,11 +81,13 @@ const ApplicationForm = () => {
       const pdf = await pdfjsLib.getDocument({ data: pdfBytes }).promise;
       let fullText = '';
       
-      for (let i = 1; i <= pdf.numPages; i++) {
+       for (let i = 1; i <= pdf.numPages; i++) {
         setParsingProgress(20 + (i / pdf.numPages) * 60);
         const page = await pdf.getPage(i);
         const textContent = await page.getTextContent();
-        fullText += textContent.items.map(item => item.str).join(' ');
+        fullText += (textContent.items as TextItem[])
+          .map((item) => item.str)
+          .join(" ");
       }
       
       setParsingProgress(90);
@@ -283,9 +286,10 @@ const ApplicationForm = () => {
             value={parsingProgress} 
             striped 
             animated 
-            size="lg" 
-            label={`${Math.round(parsingProgress)}%`}
-          />
+            size="lg"
+          >
+            {`${Math.round(parsingProgress)}%`}
+          </Progress>
         )}
 
         {!preview ? (

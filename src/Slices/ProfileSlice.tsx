@@ -1,4 +1,5 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {createSlice} from "@reduxjs/toolkit";
 import { updateProfile } from "../Services/ProfileService";
 
@@ -8,10 +9,10 @@ const profileSlice= createSlice({
     reducers:{
         changeProfile:(state,action)=>{
             state=updateProfile(action.payload);
-            return action.payload;
+            return state;
         },
         setProfile:(state,action)=>{
-            state=action.payload;
+            state=action.payload
             return state;
         }
     }
