@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
@@ -10,9 +11,10 @@ import Superscript from '@tiptap/extension-superscript';
 import Subscript from '@tiptap/extension-subscript';
 import { UseFormReturnType } from '@mantine/form';
 
+// Update the interface to be more generic
 interface TextEditorProps {
   data: string;
-  form: UseFormReturnType<{ description: string }>;
+  form: UseFormReturnType<any>; // Use 'any' or a generic type
 }
 
 export default function TextEditor({ data, form }: TextEditorProps) {
