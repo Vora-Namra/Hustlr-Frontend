@@ -1,53 +1,42 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
-import { RichTextEditor } from '@mantine/tiptap';
+import { RichTextEditor, Link } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
+import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import Link from '@tiptap/extension-link';
-import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
-import Subscript from '@tiptap/extension-subscript';
-import { UseFormReturnType } from '@mantine/form';
+import SubScript from '@tiptap/extension-subscript';
+import { useEffect } from 'react';
 
-// Update the interface to be more generic
-interface TextEditorProps {
-  data: string;
-  form: UseFormReturnType<any>; // Use 'any' or a generic type
-}
 
-export default function TextEditor({ data, form }: TextEditorProps) {
-  const editor = useEditor(
-    {
-      extensions: [
-        StarterKit,
-        Underline,
-        Link.configure({ openOnClick: false }),
-        Highlight,
-        Superscript,
-        Subscript,
-        TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      ],
-      content: data,
-      onUpdate({ editor }) {
-        form.setFieldValue('description', editor.getHTML());
-      },
-    },
-    [] // <- never re-run this config
-  );
 
-  useEffect(() => {
-    if (!editor) return;
-    const current = editor.getHTML();
-    if (data !== current) {
-      editor.commands.setContent(data, false);
+const TextEditor=(props:any)=> {
+
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Underline,
+      Link,
+      Superscript,
+      SubScript,
+      Highlight,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+    ],
+    content:props.form.getValues().description,
+    onUpdate({editor}){
+      props.form.setFieldValue('description',editor.getHTML());
     }
-  }, [data, editor]);
+  });
+  
+  useEffect(()=>{
+    editor?.commands.setContent(props.data);
+  },[editor?.commands, props.data])
 
   return (
     <RichTextEditor editor={editor}>
-      <RichTextEditor.Toolbar sticky stickyOffset={60}>
+      <RichTextEditor.Toolbar bg="mineShaft.10" sticky stickyOffset={60}>
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />
           <RichTextEditor.Italic />
@@ -59,9 +48,6 @@ export default function TextEditor({ data, form }: TextEditorProps) {
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
-          <RichTextEditor.H1 />
-          <RichTextEditor.H2 />
-          <RichTextEditor.H3 />
           <RichTextEditor.H4 />
         </RichTextEditor.ControlsGroup>
 
@@ -92,7 +78,8 @@ export default function TextEditor({ data, form }: TextEditorProps) {
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 
-      <RichTextEditor.Content style={{ minHeight: 300 }} />
+      <RichTextEditor.Content bg="mineshaft.10" />
     </RichTextEditor>
   );
 }
+export default TextEditor;
