@@ -1,5 +1,4 @@
-// TextEditor.tsx
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -12,39 +11,37 @@ import Subscript from '@tiptap/extension-subscript';
 import { UseFormReturnType } from '@mantine/form';
 
 interface TextEditorProps {
-  /** The HTML string to load (for edit vs. create) */
   data: string;
-  /** Your Mantine form instance, holding a `description` field */
   form: UseFormReturnType<{ description: string }>;
 }
 
 export default function TextEditor({ data, form }: TextEditorProps) {
-  // 1) Create the editor only once
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Underline,
-      Link.configure({ openOnClick: false }),
-      Highlight,
-      Superscript,
-      Subscript,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-    ],
-    // initialize with `data`
-    content: data,
-    onUpdate({ editor }) {
-      // sync back to your form
-      form.setFieldValue('description', editor.getHTML());
+  // Pass your entire config object as the first argument,
+  // then an empty array so it's only applied once.
+  const editor = useEditor(
+    {
+      extensions: [
+        StarterKit,
+        Underline,
+        Link.configure({ openOnClick: false }),
+        Highlight,
+        Superscript,
+        Subscript,
+        TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      ],
+      content: data,
+      onUpdate({ editor }) {
+        form.setFieldValue('description', editor.getHTML());
+      },
     },
-  });
+    [] // <- never re-run this config
+  );
 
-  // 2) When `data` prop changes (e.g. loading an existing job),
-  //    update the editor’s content without recreating it.
+  // Imperatively patch in new `data` when the prop actually changes:
   useEffect(() => {
     if (!editor) return;
     const current = editor.getHTML();
     if (data !== current) {
-      // false = do not add this to history
       editor.commands.setContent(data, false);
     }
   }, [data, editor]);
