@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -16,8 +16,6 @@ interface TextEditorProps {
 }
 
 export default function TextEditor({ data, form }: TextEditorProps) {
-  // Pass your entire config object as the first argument,
-  // then an empty array so it's only applied once.
   const editor = useEditor(
     {
       extensions: [
@@ -37,7 +35,6 @@ export default function TextEditor({ data, form }: TextEditorProps) {
     [] // <- never re-run this config
   );
 
-  // Imperatively patch in new `data` when the prop actually changes:
   useEffect(() => {
     if (!editor) return;
     const current = editor.getHTML();
