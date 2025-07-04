@@ -1,42 +1,57 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { RichTextEditor, Link } from '@mantine/tiptap';
+// TextEditor.tsx
+import { useEffect } from 'react';
+import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
-import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
+import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
-import SubScript from '@tiptap/extension-subscript';
-import { useEffect } from 'react';
+import Subscript from '@tiptap/extension-subscript';
+import { UseFormReturnType } from '@mantine/form';
 
+interface TextEditorProps {
+  /** The HTML string to load (for edit vs. create) */
+  data: string;
+  /** Your Mantine form instance, holding a `description` field */
+  form: UseFormReturnType<{ description: string }>;
+}
 
-
-const TextEditor=(props:any)=> {
-
+export default function TextEditor({ data, form }: TextEditorProps) {
+  // 1) Create the editor only once
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
-      Link,
-      Superscript,
-      SubScript,
+      Link.configure({ openOnClick: false }),
       Highlight,
+      Superscript,
+      Subscript,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
-    content:props.form.getValues().description,
-    onUpdate({editor}){
-      props.form.setFieldValue('description',editor.getHTML());
-    }
+    // initialize with `data`
+    content: data,
+    onUpdate({ editor }) {
+      // sync back to your form
+      form.setFieldValue('description', editor.getHTML());
+    },
   });
-  
-  useEffect(()=>{
-    editor?.commands.setContent(props.data);
-  },[editor?.commands, props.data])
+
+  // 2) When `data` prop changes (e.g. loading an existing job),
+  //    update the editor’s content without recreating it.
+  useEffect(() => {
+    if (!editor) return;
+    const current = editor.getHTML();
+    if (data !== current) {
+      // false = do not add this to history
+      editor.commands.setContent(data, false);
+    }
+  }, [data, editor]);
 
   return (
     <RichTextEditor editor={editor}>
-      <RichTextEditor.Toolbar bg="mineShaft.10" sticky stickyOffset={60}>
+      <RichTextEditor.Toolbar sticky stickyOffset={60}>
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />
           <RichTextEditor.Italic />
@@ -48,6 +63,9 @@ const TextEditor=(props:any)=> {
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
+          <RichTextEditor.H1 />
+          <RichTextEditor.H2 />
+          <RichTextEditor.H3 />
           <RichTextEditor.H4 />
         </RichTextEditor.ControlsGroup>
 
@@ -78,8 +96,7 @@ const TextEditor=(props:any)=> {
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 
-      <RichTextEditor.Content bg="mineshaft.10" />
+      <RichTextEditor.Content style={{ minHeight: 300 }} />
     </RichTextEditor>
   );
 }
-export default TextEditor;
